@@ -9,19 +9,44 @@
 import UIKit
 
 class ViewController: UIViewController {
-    @IBOutlet weak var drinkName: UILabel!
-    @IBOutlet weak var glassType: UILabel!
-    @IBOutlet weak var instructions: UILabel!
-    @IBOutlet weak var ingredients: UILabel!
+    @IBOutlet weak var cocktailNameView: UILabel!
+    @IBOutlet weak var cocktailGlassTypeView: UILabel!
+    @IBOutlet weak var cocktailInstructionsView: UILabel!
+    @IBOutlet weak var cocktailIngredients: UILabel!
+    @IBOutlet weak var cocktailImage: UIImageView!
     
-    let allCocktails = CocktailBank()
+    let cocktailBank = CocktailBank()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        drinkName.text = allCocktails.list[0].strDrink
+        
     }
 
-    @IBAction func generateCocktail(_ sender: Any) {
+    @IBAction func onGenerateButtonClick(_ sender: Any) {
+        updateViews(cocktail: getRandomCocktail())
+    }
+    
+    func updateViews(cocktail: Cocktail) {
         
+        cocktailNameView.text = cocktail.name
+        cocktailGlassTypeView.text = cocktail.glassType
+        cocktailInstructionsView.text = cocktail.instructions
+        cocktailImage.image = UIImage(named: "\(cocktail.image)")
+        
+        var ingredientsText: String = ""
+        for (ingredient, size) in cocktail.ingredientsUsed{
+            print(ingredientsText)
+            ingredientsText.append("\(ingredient), \(size)\n")
+        }
+        print("Final: #### \(ingredientsText)")
+
+        cocktailIngredients.text = ingredientsText
+        
+    }
+    
+    func getRandomCocktail() -> Cocktail {
+        return cocktailBank.list[Int.random(in: 0 ... 4)]
     }
     
 }

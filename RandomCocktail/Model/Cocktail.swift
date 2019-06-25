@@ -10,16 +10,19 @@ import Foundation
 
 struct Cocktail: Hashable{
     let id : Int
-    let strDrink : String
-    let strDrinkThumb : String
-    let strInstructions : String
+    let name : String
+    let glassType: String
+    let image : String
+    let instructions : String
+    let ingredientsUsed: Dictionary<String, String>
     
-    init(id: Int, strDrink: String, strDrinkThumb: String, strInstructions: String) {
+    init(id: Int, name: String,glassType: String, image: String, instructions: String, ingredientsUsed: Dictionary<String,String>) {
         self.id = id
-        self.strDrink = strDrink
-        self.strDrinkThumb = strDrinkThumb
-        self.strInstructions = strInstructions
-
+        self.name = name
+        self.glassType = glassType
+        self.image = image
+        self.instructions = instructions
+        self.ingredientsUsed = ingredientsUsed
     }
     
     
